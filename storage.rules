@@ -1,0 +1,30 @@
+rules_version = '2';
+// Returns true if the uploaded file is an image and its size is below the given number of MB.
+function isFileBelowMaxSize(maxSizeMB) {
+    return request.resource.size <= maxSizeMB * 1024 * 1024;
+}
+
+function isAuthed() {
+    return request.auth.uid != null && request.auth.token.email_verified == true;
+}
+
+function isAdmin() {
+    return isAuthed() && request.auth.token.role == 'Administrator';
+}
+
+function isEditor() {
+    return isAuthed() && request.auth.token.role == 'Content Editor';
+}
+
+function isEditorOrAdmin() {
+    return isEditor() || isAdmin();
+}
+
+service firebase.storage {
+    match /b/{bucket}/o {
+        match /{allFiles=**} {
+            allow read: if isEditorOrAdmin();
+            allow write: if isEditorOrAdmin() && isFileBelowMaxSize(50);
+        }
+    }
+}

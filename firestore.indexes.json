@@ -1,0 +1,333 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "affiliates",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "address.city",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "address.state",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "affiliates",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "address.state",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "birthday.month",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "birthday.day",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "affiliates",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "address.state",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "affiliates",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "birthday.month",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "birthday.day",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "affiliates",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "birthday.month",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "affiliates",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "cpf",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "affiliates",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "name_lowercase",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "affiliates",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "occupationId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "cpf",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "affiliates",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "occupationId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "affiliates",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "occupationId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name_lowercase",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "affiliates",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "occupationId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "rg",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "affiliates",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "rg",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "attachments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "entityId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "attachments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "entityID",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "attachments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "entityID",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "entityType",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "occupations",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "address.city",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "address.state",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "occupations",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "address.city",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "address.state",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name_lowercase",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "occupations",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "address.state",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "occupations",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "address.state",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name_lowercase",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "occupations",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "name_lowercase",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

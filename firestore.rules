@@ -1,0 +1,60 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAuthed() {
+      return request.auth.uid != null && request.auth.token.email_verified == true;
+    }
+
+    function isAdmin() {
+      return isAuthed() && request.auth.token.role == 'Administrator';
+    }
+
+    function isEditor() {
+      return isAuthed() && request.auth.token.role == 'Content Editor';
+    }
+
+    function isEditorOrAdmin() {
+      return isEditor() || isAdmin();
+    }
+
+    function attachedEntityExists(entityType, entityId) {
+      return exists(/databases/$(database)/documents/$(entityType)/$(entityId));
+    }
+
+    match /users/{id} {
+      allow read, write: if isAdmin();
+    }
+
+    match /affiliates/{affiliateId} {
+      allow read, write: if isEditorOrAdmin();
+    }
+
+    match /occupations/{occupationId} {
+      allow read, write: if isEditorOrAdmin();
+    }
+
+    match /attachments/{attachmentId} {
+      allow write: if isEditorOrAdmin()
+          && ('entityType' in request.resource.data)
+          && (request.resource.data.entityType == 'occupations' || request.resource.data.entityType == 'affiliates')
+          && ('entityId' in request.resource.data)
+          && attachedEntityExists(request.resource.data.entityType, request.resource.data.entityId);
+
+      allow read: if isEditorOrAdmin();
+      allow delete: if isEditorOrAdmin();
+    }
+
+    match /invites/{attachmentId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /statistics/{statisticId} {
+      allow read: if isEditorOrAdmin();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

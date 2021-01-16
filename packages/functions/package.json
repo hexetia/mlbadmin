@@ -1,0 +1,27 @@
+{
+  "name": "functions",
+  "version": "1.0.0",
+  "scripts": {
+    "emulators": "npm run firebase emulators:start",
+    "build": "ttsc && node ../../scripts/esbuildPostTSC.js",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "main": "lib/packages/functions/src/index.js",
+  "dependencies": {
+    "aws-sdk": "^2.808.0",
+    "firebase-admin": "^9.4.2",
+    "firebase-functions": "^3.13.0",
+    "when-expression": "^0.0.2"
+  },
+  "private": true,
+  "devDependencies": {
+    "axios": "^0.21.1",
+    "mocha": "^8.2.1",
+    "ttypescript": "^1.5.12",
+    "typescript-transform-paths": "^2.2.2"
+  }
+}
