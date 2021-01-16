@@ -7,11 +7,12 @@ export const usersCollectionName: string = 'users';
 export const statisticsCollectionName: string = 'statistics';
 
 export const firebaseConfigJs = {
-    apiKey: 'AIzaSyApc7lLOrZoLKYkYxiRxlvdYRJJ_fSU6mE',
-    authDomain: 'mlbadmin-dev.firebaseapp.com',
-    databaseURL: 'https://mlbadmin-dev.firebaseio.com',
-    projectId: 'mlbadmin-dev',
-    storageBucket: 'mlbadmin-dev.appspot.com',
-    messagingSenderId: '1043018775386',
-    appId: '1:1043018775386:web:22ade00467e97a8b911163',
+    apiKey: 'AIzaSyCwn-9yQCcwMUut93x0KQCOhbsE6fghOkw',
+    authDomain: 'mlbadmin.firebaseapp.com',
+    databaseURL: 'https://mlbadmin.firebaseio.com',
+    projectId: 'mlbadmin',
+    storageBucket: 'mlbadmin.appspot.com',
+    messagingSenderId: '753466128985',
+    appId: '1:753466128985:web:192302688d963fd45f0f48',
+    measurementId: 'G-31XM7M6MZ5',
 };
