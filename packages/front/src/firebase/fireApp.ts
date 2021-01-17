@@ -11,7 +11,7 @@ function isLocalHost(): boolean {
     );
 }
 
-if (isLocalHost()) {
+if (typeof window !== 'undefined') {
     window.fireApp = firebase.app();
     window.fireDB = window.fireApp.firestore();
     window.fireDB.settings({
@@ -19,11 +19,13 @@ if (isLocalHost()) {
     });
     window.fireStorage = isLocalHost() ? firebaseStorageMock : window.fireApp.storage();
 
-    // @ts-ignore
-    window.fireApp.auth().useEmulator(`http://${location.hostname}:9099/`, { disableWarnings: true });
-    window.fireApp.functions().useEmulator(`${location.hostname}`, 5001);
-    window.fireDB.settings({
-        host: `${location.hostname}:8080`,
-        ssl: false,
-    });
+    if (isLocalHost()) {
+        // @ts-ignore
+        window.fireApp.auth().useEmulator(`http://${location.hostname}:9099/`, { disableWarnings: true });
+        window.fireApp.functions().useEmulator(`${location.hostname}`, 5001);
+        window.fireDB.settings({
+            host: `${location.hostname}:8080`,
+            ssl: false,
+        });
+    }
 }

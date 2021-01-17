@@ -1,4 +1,5 @@
 # MLB Admin
+![img](/assets/7x7_pixel4-min.png)
 ![img](/assets/4x4-2k-min.png)
 
 ## About this Project
