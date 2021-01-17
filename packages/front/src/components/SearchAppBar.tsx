@@ -5,7 +5,6 @@ import { nanoid } from 'nanoid/non-secure';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import { toggleDarkTheme } from '../stores/themeStore';
 import styled from 'styled-components';
-import firebase from 'firebase/app';
 import { authStore } from '../stores/authStore';
 import { affiliatesFiltersStoreContext } from '../stores/affiliatesFiltersStore';
 import { observer } from 'mobx-react-lite';
@@ -51,7 +50,7 @@ export const SearchAppBar = observer(() => {
 
     const handleMenuClick = () => {
         handleMenuClose();
-        firebase
+        window.firebase
             .auth()
             .signOut()
             .then(() => {

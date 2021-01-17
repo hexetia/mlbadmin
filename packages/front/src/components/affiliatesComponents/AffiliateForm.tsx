@@ -22,7 +22,6 @@ import { SaveEntityButton } from '../formCommon/SaveEntityButton';
 import { TextFieldOffAutocomplete } from '../formCommon/fields/TextFieldOffAutocomplete';
 import { ErrorMessageWrapperStyled } from '../formCommon/ErrorMessageWrapperStyled';
 import router from 'next/router';
-import { fireDB } from '../../firebase/fireApp';
 import { FirebaseImage } from '../../firebase/FirebaseImage';
 import { IAffiliateEdit } from '../../../../../types/__project_defs/IAffiliateEdit';
 import { affiliateFormSchema } from './affiliateFormSchema';
@@ -36,7 +35,7 @@ export default function AffiliateForm({ affiliate = {} }: { affiliate?: Partial<
 
         return affiliate;
     };
-    const affiliateRepo = useMemo<AffiliateRepository>(() => new AffiliateRepository(fireDB), []);
+    const affiliateRepo = useMemo<AffiliateRepository>(() => new AffiliateRepository(window.fireDB), []);
 
     const { handleSubmit, setValue, control, errors, formState, register } = useForm<Partial<IAffiliateEdit>>({
         mode: 'onTouched',

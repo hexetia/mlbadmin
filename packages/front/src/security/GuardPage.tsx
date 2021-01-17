@@ -6,7 +6,6 @@ import Login from './Login';
 import { AUTH_STATUS_ENUM } from '../enums/AUTH_STATUS_ENUM';
 import { Button, Typography } from '@material-ui/core';
 import { AnimatedDot } from '../components/AnimatedDot';
-import firebase from 'firebase/app';
 import router from 'next/router';
 
 type GuardParams = (role: ROLES, Component: React.FunctionComponent<any>) => React.ReactNode;
@@ -18,7 +17,7 @@ type GuardParams = (role: ROLES, Component: React.FunctionComponent<any>) => Rea
 export const GuardPage: GuardParams = (role, Component) =>
     observer(function GuardPage() {
         const handleLogout = () => {
-            firebase
+            window.firebase
                 .auth()
                 .signOut()
                 .then(() => {

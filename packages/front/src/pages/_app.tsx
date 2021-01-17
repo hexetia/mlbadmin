@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import '../utils/mobxNextjs';
+import '../firebase/fireApp';
 import 'react-toastify/dist/ReactToastify.css';
 import { Container, CssBaseline, Hidden, NoSsr } from '@material-ui/core';
 import { StyleSheetManager, ThemeProvider as StyledThemeProvider } from 'styled-components';

@@ -1,7 +1,6 @@
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
 import { QueryFunctionContext } from 'react-query/types/core/types';
 import { IOccupation } from '../../../../../../types/__project_defs/IOccupation';
-import { fireDB } from '../../../firebase/fireApp';
 import { occupationCollectionName } from '../../../constants';
 
 export const queryMatchingOccupations = AwesomeDebouncePromise(async (context: QueryFunctionContext<string, string>): Promise<
@@ -11,7 +10,7 @@ export const queryMatchingOccupations = AwesomeDebouncePromise(async (context: Q
         return [];
     }
 
-    const querySnapshot = await fireDB
+    const querySnapshot = await window.fireDB
         .collection(occupationCollectionName)
         .where('name_lowercase', '>=', context.queryKey[1].toLowerCase())
         .where('name_lowercase', '<=', context.queryKey[1].toLowerCase() + '\uf8ff')

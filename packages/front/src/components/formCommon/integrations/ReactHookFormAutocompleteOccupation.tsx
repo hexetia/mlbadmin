@@ -1,11 +1,7 @@
-import React, { useEffect, useMemo } from 'react';
+import React from 'react';
 import { Controller } from 'react-hook-form';
 import { AutocompleteOccupation } from '../fields/AutocompleteOccupation';
-import { observer, useLocalObservable } from 'mobx-react-lite';
-import { IOccupation } from '../../../../../../types/__project_defs/IOccupation';
-import { runInAction, toJS } from 'mobx';
-import { fireDB } from '../../../firebase/fireApp';
-import { OccupationRepository } from '../../../repository/OccupationRepository';
+import { observer } from 'mobx-react-lite';
 
 export const ReactHookFormAutocompleteOccupation = observer((props: { name: string; control: any }) => (
     <Controller

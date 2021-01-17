@@ -1,4 +1,3 @@
-import firebase from 'firebase/app';
 import { authStatus, authStore } from '../stores/authStore';
 import { Avatar, Button, Container, Typography } from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
@@ -42,7 +41,7 @@ const Profile = observer(() => (
         {authStatus() === AUTH_STATUS_ENUM.LOGGED && (
             <ProfileMenuItem
                 onClick={() => {
-                    firebase
+                    window.firebase
                         .auth()
                         .signOut()
                         .then(() => {

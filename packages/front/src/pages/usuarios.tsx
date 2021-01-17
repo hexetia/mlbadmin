@@ -22,7 +22,6 @@ import { SendInvitesSection } from '../components/users/SendInvitesSection';
 import { InvitesList } from '../components/users/InvitesList';
 import { LinearLoading } from '../components/LinearLoading';
 import { ROLES } from '../enums/ROLES';
-import { fireApp, fireDB } from '../firebase/fireApp';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { UserListItem } from '../../../../types/__project_defs/UserListItem';
@@ -43,7 +42,7 @@ const Users = () => {
     const [newPermission, setNewPermission] = useState('');
     const [isSaving, setIsSaving] = useState(false);
     const fullScreenDialog = useMediaQuery('(max-width: 700px)');
-    const { data, status } = useFirestoreQuery(fireDB.collection(usersCollectionName));
+    const { data, status } = useFirestoreQuery(window.fireDB.collection(usersCollectionName));
 
     const handleClickEditUser = (user: UserListItem) => () => {
         unstable_batchedUpdates(() => {
@@ -57,7 +56,7 @@ const Users = () => {
         setIsSaving(true);
 
         try {
-            await fireApp.functions().httpsCallable('changeRole')({ targetUID: selectedUser?.uid, targetRole: newPermission });
+            await window.fireApp.functions().httpsCallable('changeRole')({ targetUID: selectedUser?.uid, targetRole: newPermission });
         } catch (e: unknown) {
         } finally {
             setIsSaving(false);
@@ -90,7 +89,7 @@ const Users = () => {
         }
 
         try {
-            await fireApp.functions().httpsCallable('deleteUser')({ email: user.email });
+            await window.fireApp.functions().httpsCallable('deleteUser')({ email: user.email });
             toast.success('Usuário deletado');
         } catch (e: unknown) {
         } finally {

@@ -3,8 +3,6 @@ import { Button, FormHelperText } from '@material-ui/core';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import { fileExtension } from '../../utils/fileExtension';
 import { nanoid } from 'nanoid/non-secure';
-import { fireDB, fireStorage } from '../../firebase/fireApp';
-import firebase from 'firebase/app';
 import { attachmentsCollectionName, occupationCollectionName } from '../../constants';
 import { toast } from 'react-toastify';
 import { AttachmentRepository } from '../../repository/AttachmentRepository';
@@ -41,7 +39,7 @@ export const Attachments = observer(
     }) => {
         useEffect(() => {
             const { entityType, entityId } = props;
-            const unsubscribe = fireDB
+            const unsubscribe = window.fireDB
                 .collection(entityType)
                 .doc(entityId)
                 .onSnapshot(snapshot => {
@@ -117,7 +115,7 @@ export const Attachments = observer(
             // 1. 'state_changed' observer, called any time the state changes
             // 2. Error observer, called on failure
             // 3. Completion observer, called on successful completion
-            const uploadTask = fireStorage
+            const uploadTask = window.fireStorage
                 .ref()
                 .child(newPath)
                 .put(attachment.path as File);
@@ -133,9 +131,9 @@ export const Attachments = observer(
                     });
 
                     switch (snapshot.state) {
-                        case firebase.storage.TaskState.PAUSED: // or 'paused'
+                        case window.firebase.storage.TaskState.PAUSED: // or 'paused'
                             break;
-                        case firebase.storage.TaskState.RUNNING: // or 'running'
+                        case window.firebase.storage.TaskState.RUNNING: // or 'running'
                             break;
                     }
                 },

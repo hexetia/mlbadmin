@@ -17,7 +17,6 @@ import { mq } from '../../utils/themeUtils';
 import { SaveEntityButton } from '../formCommon/SaveEntityButton';
 import { ErrorMessageWrapperStyled } from '../formCommon/ErrorMessageWrapperStyled';
 import router from 'next/router';
-import { fireDB } from '../../firebase/fireApp';
 import { FirebaseImage } from '../../firebase/FirebaseImage';
 import { occupationSchema } from './occupationSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -27,7 +26,7 @@ import { useQueryClient } from 'react-query';
 
 export const OccupationForm = observer(({ occupation = {} }: { occupation: Partial<IOccupation> }) => {
     const nomeFieldID = useId();
-    const repository = useMemo<OccupationRepository>(() => new OccupationRepository(fireDB), []);
+    const repository = useMemo<OccupationRepository>(() => new OccupationRepository(window.fireDB), []);
     const queryClient = useQueryClient();
 
     const { register, handleSubmit, setValue, control, formState, errors } = useForm<Partial<IOccupation>>({

@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { ROLES } from '../../../enums/ROLES';
 import { GuardPage } from '../../../security/GuardPage';
-import { fireDB } from '../../../firebase/fireApp';
 import { useClientRouter } from 'use-client-router';
 import { IOccupation } from '../../../../../../types/__project_defs/IOccupation';
 import { OccupationForm } from '../../../components/occupationsComponents/OccupationForm';
@@ -14,7 +13,7 @@ import Head from 'next/head';
 
 const EditOccupation = observer(function EditOccupation() {
     const clientRouter = useClientRouter();
-    const repository = useMemo<OccupationRepository>(() => new OccupationRepository(fireDB), []);
+    const repository = useMemo<OccupationRepository>(() => new OccupationRepository(window.fireDB), []);
 
     const { data, status } = useQuery<IOccupation>(
         ['edit_occupation', clientRouter.query.id],

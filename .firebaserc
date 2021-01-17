@@ -1,5 +1,6 @@
 {
   "projects": {
-    "production": "mlbadmin"
+    "production": "mlbadmin",
+    "staging": "mlbadmin-dev"
   }
 }

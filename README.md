@@ -9,6 +9,7 @@ contact by phone and searching for this data on paper cards was time consuming.
 ## Built with ❤️ and
 - [Firebase](https://firebase.google.com/)
 - [Next.js](https://github.com/vercel/next.js) (optimized to run without the next.js server on production)
+- [React-Fitty](https://github.com/morhogg/react-fitty)
 - [React-Query](https://github.com/tannerlinsley/react-query)
 - [Mobx](https://github.com/mobxjs/mobx)
 - [Material-UI](https://github.com/mui-org/material-ui)
@@ -55,8 +56,8 @@ and add the following variables:
 - **AWS_SES_SECRET_ACCESS_KEY** - optional<br />
   Aws credentials to send the system emails.
 
-### /packages/front/src/constants.ts
-Update the const firebaseConfigJs with your firebase project config data, see https://firebase.google.com/docs/web/setup#add-sdks-initialize for more details.
+### /.firebaserc
+Use the [Firebase cli "use" command](https://firebase.google.com/docs/cli#add_alias) `firebase use` to update the project name before building and deploying the project production
 
 ### Firebase hosting redirects
 We made a custom script to map next.js routes in firebase.json, so you need to write custom redirects in firebase hosting you need to write that redirects in firebaseHostingRewrites.js
@@ -110,7 +111,7 @@ We made a custom script to map next.js routes in firebase.json, so you need to w
   
 ## But not least
 - All integration tests will run on port 3000 (next.js server)
-- To use the Firebase Hosting Emulator you need to first build the frontend using the command: `yarn build:front`
+- If you need to use the Firebase Hosting Emulator you need to first build the frontend using the command: `yarn build:front`
 
 ## Available Commands
 In the project directory, you can run:

@@ -12,7 +12,6 @@ import { ReactFitty } from './ReactFitty';
 import { AffiliatesListPages } from './AffiliatesListPages';
 import { ShowMore } from './ShowMore';
 import { OccupationRepository } from '../repository/OccupationRepository';
-import { fireDB } from '../firebase/fireApp';
 import { useClientRouter } from 'use-client-router';
 
 function parseFilters<T>(filtersStore: T): Partial<T> {
@@ -34,7 +33,7 @@ export const BirthdaysView = observer(() => {
 
     const { data: occupation } = useQuery(
         'birthdays_occupation',
-        () => new OccupationRepository(fireDB).findById(clientRouter.query.id as string),
+        () => new OccupationRepository(window.fireDB).findById(clientRouter.query.id as string),
         { enabled: occupationId !== undefined }
     );
 

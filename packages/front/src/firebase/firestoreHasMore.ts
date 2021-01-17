@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+import type firebase from 'firebase/app';
 
 type QuerySnapshot = firebase.firestore.QuerySnapshot;
 type Query = firebase.firestore.Query;

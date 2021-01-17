@@ -12,11 +12,11 @@ import { AppLink } from './AppLink';
 import { useClientRouter } from 'use-client-router';
 
 const routeActive = (router: NextRouter): number =>
-    when(router.pathname)({
-        '/': 0,
-        '/ocupacoes': 1,
-        '/filiados': 2,
-        '/perfil': 3,
+    when({
+        [(router.pathname === '/') as any]: 0,
+        [router.pathname.includes('/ocupacoes') as any]: 1,
+        [router.pathname.includes('/filiados') as any]: 2,
+        [router.pathname.includes('/perfil') as any]: 3,
         else: 4,
     });
 

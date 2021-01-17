@@ -6,7 +6,6 @@ import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import { IOccupation } from '../../../../types/__project_defs/IOccupation';
 import { AffiliateRepository } from '../repository/AffiliateRepository';
-import { fireDB } from '../firebase/fireApp';
 import { occupationCollectionName } from '../constants';
 import { useFirestoreQuery } from '../customHooks/useFirestoreQuery';
 import { GuardPage } from '../security/GuardPage';
@@ -134,7 +133,7 @@ export function createFakeOccupation(partialOccupation?: Partial<IOccupation>): 
 
 const CriarVariosFiliados = (props: { ocupacao?: IOccupation }) => {
     const [numeroFiliados, setNumberoFiliados] = useState(1);
-    const repo = new AffiliateRepository(fireDB);
+    const repo = new AffiliateRepository(window.fireDB);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNumberoFiliados(parseInt(event.target?.value as string));
@@ -160,9 +159,9 @@ const CriarVariosFiliados = (props: { ocupacao?: IOccupation }) => {
 
 const Fake = () => {
     const [ocupacaoSelectedIndex, setOcupacaoSelectedIndex] = useState<number>(0);
-    const { data } = useFirestoreQuery(fireDB.collection(occupationCollectionName).limit(5));
+    const { data } = useFirestoreQuery(window.fireDB.collection(occupationCollectionName).limit(5));
     const ocupacoes = data || [];
-    const repository = useMemo<OccupationRepository>(() => new OccupationRepository(fireDB), []);
+    const repository = useMemo<OccupationRepository>(() => new OccupationRepository(window.fireDB), []);
 
     const makeOcupacao = () => {
         const ocupacao = createFakeOccupation();

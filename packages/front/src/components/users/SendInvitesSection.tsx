@@ -11,7 +11,6 @@ import { InviteRepository } from '../../repository/InviteRepository';
 import pMinDelay from 'p-min-delay';
 import { authStore } from '../../stores/authStore';
 import { ROLES } from '../../enums/ROLES';
-import { fireDB } from '../../firebase/fireApp';
 
 const schema = yup.object().shape({
     email: yup
@@ -21,7 +20,7 @@ const schema = yup.object().shape({
         .test(
             'already have two invites to that email today',
             'Já existem dois convites feitos hoje para esse email, aguarde até amanhã para convidar novamente',
-            async value => (await new InviteRepository(fireDB).findByEmailAndDate(value!)).length < 2
+            async value => (await new InviteRepository(window.fireDB).findByEmailAndDate(value!)).length < 2
         ),
 });
 
@@ -29,7 +28,7 @@ type OnlyEmail = { email: string };
 
 export const SendInvitesSection = () => {
     const id = useId();
-    const invitesRepository = useMemo(() => new InviteRepository(fireDB), []);
+    const invitesRepository = useMemo(() => new InviteRepository(window.fireDB), []);
     const [inviteOpen, setInviteOpen] = useState(false);
     const { handleSubmit, control, formState, errors } = useForm<OnlyEmail>({
         resolver: yupResolver(schema),

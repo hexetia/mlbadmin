@@ -1,5 +1,4 @@
 import { useQuery } from 'react-query';
-import { fireStorage } from './fireApp';
 import { imgStr } from './imgStr';
 import { notEmptyStr } from '../utils/StringUtils';
 
@@ -16,7 +15,7 @@ export const FirebaseImage = (props: { src: string; Component: any; Fallback?: a
             return ctx.queryKey[0];
         }
 
-        return fireStorage.ref(ctx.queryKey[0]).getDownloadURL();
+        return window.fireStorage.ref(ctx.queryKey[0]).getDownloadURL();
     });
     const Component = props.Component;
     const Fallback = props.Fallback;

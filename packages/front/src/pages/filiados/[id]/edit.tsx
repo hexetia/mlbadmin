@@ -4,15 +4,14 @@ import React, { useMemo } from 'react';
 import AffiliateForm from '../../../components/affiliatesComponents/AffiliateForm';
 import { ROLES } from '../../../enums/ROLES';
 import { GuardPage } from '../../../security/GuardPage';
-import { fireDB } from '../../../firebase/fireApp';
 import { useClientRouter } from 'use-client-router';
 import { OccupationRepository } from '../../../repository/OccupationRepository';
 import Head from 'next/head';
 
 function AffiliateEdit() {
     const clientRouter = useClientRouter();
-    const affiliateRepo = useMemo<AffiliateRepository>(() => new AffiliateRepository(fireDB), []);
-    const occupationRepository = useMemo(() => new OccupationRepository(fireDB), []);
+    const affiliateRepo = useMemo<AffiliateRepository>(() => new AffiliateRepository(window.fireDB), []);
+    const occupationRepository = useMemo(() => new OccupationRepository(window.fireDB), []);
 
     const { data, status } = useQuery(
         ['affiliate_form', clientRouter.query.id],

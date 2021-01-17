@@ -1,6 +1,5 @@
 import React, { useContext, useRef } from 'react';
 import Typography from '@material-ui/core/Typography';
-import { fireDB } from '../firebase/fireApp';
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import { IOccupation } from '../../../../types/__project_defs/IOccupation';
@@ -34,16 +33,16 @@ const Dashboard = () => {
         500
     );
 
-    const { data: statisticsData } = useFirestoreQuery(fireDB.collection('statistics').doc('general'));
+    const { data: statisticsData } = useFirestoreQuery(window.fireDB.collection('statistics').doc('general'));
 
     const { data: biggestOccupations } = useFirestoreQuery(
-        fireDB
+        window.fireDB
             .collection(occupationCollectionName)
             .where('totalAffiliates' as keyof IOccupation, '>', 0)
             .limit(5)
             .orderBy('totalAffiliates' as keyof IOccupation, 'desc')
     );
-    const { data: numberOfBirthdaysByMonth } = useFirestoreQuery(fireDB.collection(statisticsCollectionName).doc('birthdays'));
+    const { data: numberOfBirthdaysByMonth } = useFirestoreQuery(window.fireDB.collection(statisticsCollectionName).doc('birthdays'));
 
     return (
         <>

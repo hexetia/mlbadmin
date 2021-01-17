@@ -2,13 +2,13 @@ import * as firebaseAdmin from 'firebase-admin';
 import * as firebaseTest from '@firebase/rules-unit-testing';
 import { withFunctionTriggersDisabled } from '@firebase/rules-unit-testing';
 import { FirebaseFirestore } from '@firebase/firestore-types';
-import { firebaseConfigJs } from 'front/src/constants';
+import { firebaseProjectId } from './firebaseProjectId';
 
 export const fireAdmin = firebaseAdmin.apps.length
     ? firebaseAdmin.app()
-    : firebaseAdmin.initializeApp({ projectId: firebaseConfigJs.projectId, credential: firebaseAdmin.credential.applicationDefault() });
+    : firebaseAdmin.initializeApp({ projectId: firebaseProjectId, credential: firebaseAdmin.credential.applicationDefault() });
 
-export const fireTestApp = firebaseTest.initializeAdminApp({ projectId: firebaseConfigJs.projectId });
+export const fireTestApp = firebaseTest.initializeAdminApp({ projectId: firebaseProjectId });
 
 export async function deleteAllUsers() {
     const usersResult = await fireAdmin.auth().listUsers();

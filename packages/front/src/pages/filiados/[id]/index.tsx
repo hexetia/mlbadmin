@@ -1,6 +1,5 @@
 import React from 'react';
 import { useFirestoreQuery } from '../../../customHooks/useFirestoreQuery';
-import { fireDB } from '../../../firebase/fireApp';
 import { affiliatesCollectionName } from '../../../constants';
 import { GuardPage } from '../../../security/GuardPage';
 import { ROLES } from '../../../enums/ROLES';
@@ -12,7 +11,9 @@ import { PageContent } from '../../../components/styles/PageContent';
 function Affiliate() {
     const clientRouter = useClientRouter();
 
-    const { data, status, error } = useFirestoreQuery(fireDB.collection(affiliatesCollectionName).doc(clientRouter.query.id as string));
+    const { data, status, error } = useFirestoreQuery(
+        window.fireDB.collection(affiliatesCollectionName).doc(clientRouter.query.id as string)
+    );
 
     if (status === 'loading') {
         return <Skeleton variant='rect' height='50%' />;

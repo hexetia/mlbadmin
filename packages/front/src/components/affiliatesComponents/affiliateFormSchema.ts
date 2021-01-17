@@ -3,7 +3,6 @@ import { notEmptyStr } from '../../utils/StringUtils';
 import { isFullName } from '../../utils/isFullName';
 import { isValidCPF } from '@brazilian-utils/brazilian-utils';
 import { isValidDateString } from '../../utils/dateUtils';
-import { fireDB } from '../../firebase/fireApp';
 import { affiliatesCollectionName } from '../../constants';
 
 export const affiliateFormSchema = yup.object().shape({
@@ -27,7 +26,7 @@ export const affiliateFormSchema = yup.object().shape({
                 return false;
             } else {
                 // check if cpf is already used
-                const querySnap = await fireDB.collection(affiliatesCollectionName).where('cpf', '==', value).get();
+                const querySnap = await window.fireDB.collection(affiliatesCollectionName).where('cpf', '==', value).get();
 
                 if (!querySnap.empty) {
                     return querySnap.docs[0].data().id === this.parent.id;

@@ -1,5 +1,4 @@
 import { Invite } from '../../../../types/__project_defs/Invite';
-import { fireDB } from '../firebase/fireApp';
 import { invitesCollectionName } from '../constants';
 import { nanoid } from 'nanoid/non-secure';
 import { FirebaseFirestore, DocumentReference } from '@firebase/firestore-types';
@@ -24,7 +23,7 @@ export class InviteRepository {
     }
 
     async delete(invite: Invite): Promise<void> {
-        const docRef = fireDB.collection(invitesCollectionName).doc(invite.id);
+        const docRef = window.fireDB.collection(invitesCollectionName).doc(invite.id);
 
         return docRef.delete();
     }
@@ -40,7 +39,7 @@ export class InviteRepository {
         const copiedDate = new Date(date.getTime());
         copiedDate.setHours(23, 59, 59, 999);
 
-        const query = await fireDB
+        const query = await window.fireDB
             .collection(invitesCollectionName)
             .where('email' as keyof Invite, '==', email)
             .where('createdAt' as keyof Invite, '>=', date)

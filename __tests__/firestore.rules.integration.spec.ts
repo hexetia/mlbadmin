@@ -2,7 +2,6 @@ import * as firebase from '@firebase/rules-unit-testing';
 import {
     affiliatesCollectionName,
     attachmentsCollectionName,
-    firebaseConfigJs,
     invitesCollectionName,
     occupationCollectionName,
     statisticsCollectionName,
@@ -15,6 +14,7 @@ import { FirebaseFirestore } from '@firebase/firestore-types';
 import { integrationTestTimeout } from './testUtils/appTestUtils';
 import { clearFirestoreSync } from './testUtils/firebaseTestUtils';
 import { createFakeAffiliate, createFakeOccupation } from './testUtils/dumbData';
+import { firebaseProjectId } from './testUtils/firebaseProjectId';
 
 interface AuthObj {
     uid: string;
@@ -39,7 +39,7 @@ function authFactory(partialAuth?: Partial<AuthObj>): AuthObj {
 function editorDbFactory(options?: DBOptions): FirebaseFirestore {
     return firebase
         .initializeTestApp({
-            projectId: firebaseConfigJs.projectId,
+            projectId: firebaseProjectId,
             auth: authFactory(options?.auth || { role: ROLES.CONTENT_EDITOR }),
         })
         .firestore();
@@ -48,7 +48,7 @@ function editorDbFactory(options?: DBOptions): FirebaseFirestore {
 function adminDbFactory(options?: DBOptions): FirebaseFirestore {
     return firebase
         .initializeTestApp({
-            projectId: firebaseConfigJs.projectId,
+            projectId: firebaseProjectId,
             auth: authFactory(options?.auth || { role: ROLES.ADMINISTRATOR }),
         })
         .firestore();
@@ -57,7 +57,7 @@ function adminDbFactory(options?: DBOptions): FirebaseFirestore {
 function anonymousDbFactory(options?: DBOptions): FirebaseFirestore {
     return firebase
         .initializeTestApp({
-            projectId: firebaseConfigJs.projectId,
+            projectId: firebaseProjectId,
             auth: authFactory({ role: 'xxx' }),
         })
         .firestore();

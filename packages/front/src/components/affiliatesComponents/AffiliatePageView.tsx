@@ -15,14 +15,13 @@ import { AppLink } from '../AppLink';
 import { AffFirstBlockDesk, AffPhoto, AffLabel, AffTextBlock, AffPhone } from './AffiliatePageStyles';
 import { useMemo } from 'react';
 import { OccupationRepository } from '../../repository/OccupationRepository';
-import { fireDB } from '../../firebase/fireApp';
 import { useQuery } from 'react-query';
 import { IOccupation } from '../../../../../types/__project_defs/IOccupation';
 import Head from 'next/head';
 import omit from 'object.omit';
 
 export const AffiliatePageView = (props: { affiliate: IAffiliate }) => {
-    const occupationRepository = useMemo(() => new OccupationRepository(fireDB), []);
+    const occupationRepository = useMemo(() => new OccupationRepository(window.fireDB), []);
     const { data: occupation } = useQuery<IOccupation>(
         `occupation_${props.affiliate.occupationId}`,
         () => occupationRepository.findById(props.affiliate.occupationId),

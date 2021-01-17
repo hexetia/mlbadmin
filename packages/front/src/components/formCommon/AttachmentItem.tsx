@@ -6,7 +6,6 @@ import { defaultStyles, FileIcon } from 'react-file-icon';
 import { fileExtension } from '../../utils/fileExtension';
 import TextField from '@material-ui/core/TextField';
 import pMinDelay from 'p-min-delay';
-import { fireDB } from '../../firebase/fireApp';
 import { attachmentsCollectionName } from '../../constants';
 import { basename } from '../../utils/fileUtils';
 import EditIcon from '@material-ui/icons/Edit';
@@ -77,7 +76,7 @@ export const AttachmentItem = observer((props: { attachment: IAttachment & { pro
                                         setStatus('updating');
 
                                         pMinDelay(
-                                            fireDB
+                                            window.fireDB
                                                 .collection(attachmentsCollectionName)
                                                 .doc(props.attachment.id!)
                                                 .update('name', `${newName}.${fileExtension(props.attachment.name)}`),

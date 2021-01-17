@@ -8,7 +8,6 @@ import { OcupacaoCoverPlaceholder } from '../../../components/occupationsCompone
 import { observer } from 'mobx-react-lite';
 import { ROLES } from '../../../enums/ROLES';
 import { GuardPage } from '../../../security/GuardPage';
-import { fireDB } from '../../../firebase/fireApp';
 import { useClientRouter } from 'use-client-router';
 import { OccupationAffiliates } from '../../../components/occupations/OccupationAffiliates';
 import { Skeleton } from '@material-ui/lab';
@@ -24,7 +23,7 @@ import Head from 'next/head';
 const Occupation = observer(function Occupation() {
     const router = useClientRouter();
     const { id } = router.query;
-    const repository = useMemo<OccupationRepository>(() => new OccupationRepository(fireDB), []);
+    const repository = useMemo<OccupationRepository>(() => new OccupationRepository(window.fireDB), []);
 
     const [showFilters, setShowFilters] = useState(false);
 

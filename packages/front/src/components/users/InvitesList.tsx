@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { invitesCollectionName } from '../../constants';
-import { fireDB } from '../../firebase/fireApp';
 import { Invite } from '../../../../../types/__project_defs/Invite';
 import { IconButton, Typography } from '@material-ui/core';
 import { Paper } from '@material-ui/core';
@@ -12,7 +11,7 @@ import { useFirestoreQuery } from '../../customHooks/useFirestoreQuery';
 import { LinearLoading } from '../LinearLoading';
 
 export const InvitesList = () => {
-    const { data, status } = useFirestoreQuery(fireDB.collection(invitesCollectionName).orderBy('createdAt', 'desc'));
+    const { data, status } = useFirestoreQuery(window.fireDB.collection(invitesCollectionName).orderBy('createdAt', 'desc'));
 
     return (
         <div>
@@ -34,7 +33,7 @@ export const InvitesList = () => {
 };
 
 const InviteView = ({ invite }: { invite: Invite }) => {
-    const invitesRepository = useMemo(() => new InviteRepository(fireDB), []);
+    const invitesRepository = useMemo(() => new InviteRepository(window.fireDB), []);
 
     return (
         <Paper

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useFirestoreQuery } from '../customHooks/useFirestoreQuery';
-import { fireDB } from '../firebase/fireApp';
 import { attachmentsCollectionName } from '../constants';
 import { Attachments } from './formCommon/Attachments';
 import { Typography } from '@material-ui/core';
@@ -18,7 +17,7 @@ export const AttachmentsProvider = observer((props: Props) => {
     console.log('props', props);
 
     const { data: savedAttachments, status, error } = useFirestoreQuery(
-        fireDB.collection(attachmentsCollectionName).where('entityId', '==', props.entityId).orderBy('createdAt')
+        window.fireDB.collection(attachmentsCollectionName).where('entityId', '==', props.entityId).orderBy('createdAt')
     );
 
     if (status === 'error') {

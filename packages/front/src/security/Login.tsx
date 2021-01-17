@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import firebase from 'firebase/app';
+import React, { useEffect, useRef } from 'react';
 import { authStatus, authStore, hasRole, resetAuthStore } from '../stores/authStore';
 import { GoogleLogo } from '../icons/GoogleLogo';
 import { Button, TextField, Typography } from '@material-ui/core';
@@ -10,12 +9,9 @@ import { AnimatedDot } from '../components/AnimatedDot';
 import router from 'next/router';
 import { FireUser } from '../../../../types/__external_defs/firebase-complements';
 import { clearIntervalAsync, setIntervalAsync } from 'set-interval-async/fixed';
-import { fireApp } from '../firebase/fireApp';
 import { toast } from 'react-toastify';
 import { runInAction } from 'mobx';
 import { createGlobalStyle } from 'styled-components';
-
-const provider = new firebase.auth.GoogleAuthProvider();
 
 const LoginGlobalStyle = createGlobalStyle`
     body {
@@ -33,7 +29,7 @@ const Login = observer(() => {
     }, [authStore.role, authStore.user]);
 
     const handleLogout = () => {
-        firebase
+        window.firebase
             .auth()
             .signOut()
             .then(() => {
@@ -44,7 +40,10 @@ const Login = observer(() => {
     const handleLogin = async (type: 'test' | 'production', customEmail?: string) => {
         try {
             if (type === 'production') {
-                firebase
+                // @ts-ignore
+                const provider = new window.firebase.auth.GoogleAuthProvider();
+
+                window.firebase
                     .auth()
                     .signInWithPopup(provider)
                     .catch(function () {
@@ -63,7 +62,9 @@ const Login = observer(() => {
                 };
 
                 try {
-                    await firebase.auth().signInWithCredential(firebase.auth.GoogleAuthProvider.credential(JSON.stringify(userInfo)));
+                    await window.firebase
+                        .auth()
+                        .signInWithCredential(window.firebase.auth.GoogleAuthProvider.credential(JSON.stringify(userInfo)));
                 } catch (e) {
                     console.log('cath onClickLogin', e.message);
                 }
@@ -140,46 +141,48 @@ async function refreshClaimsUntilUserIsRecognized(user: FireUser) {
         } catch (e) {
             if (e.code.includes('auth/internal-error')) {
                 resetAuthStore();
-                await fireApp.auth().signOut();
+                await window.firebase.auth().signOut();
                 toast.info('Infelizmente você não possui um convite de acesso');
             }
         }
     }, 2000);
 }
 
-fireApp.auth().onAuthStateChanged(
-    async user => {
-        if (user == null) {
-            await fireApp.auth().signOut();
-            resetAuthStore();
-            // no need do handle that error, its mostly some complaim about clearing interval on undefined
-            clearIntervalAsync(refreshClaimsIntervalHolder).catch(() => {});
-        } else {
-            /**
-             * We need to call getIdTokenResult to get user Custom Claims, that data don't come with User object
-             * claims is part of the Security Access in this frontend app
-             */
-            let role: string = '';
-            try {
-                role = (await user?.getIdTokenResult())?.claims?.role || '';
-            } catch (e) {}
-
-            runInAction(() => {
-                authStore.user = user;
-                authStore.role = role;
-            });
-
-            if ((Object.values(ROLES) as string[]).includes(authStore.role)) {
+if (typeof window !== 'undefined') {
+    window.firebase.auth().onAuthStateChanged(
+        async user => {
+            if (user == null) {
+                await window.firebase.auth().signOut();
+                resetAuthStore();
+                // no need do handle that error, its mostly some complaim about clearing interval on undefined
                 clearIntervalAsync(refreshClaimsIntervalHolder).catch(() => {});
             } else {
-                // no need do handle that error, its mostly some complaim about clearing interval on undefined
-                refreshClaimsUntilUserIsRecognized(user);
+                /**
+                 * We need to call getIdTokenResult to get user Custom Claims, that data don't come with User object
+                 * claims is part of the Security Access in this frontend app
+                 */
+                let role: string = '';
+                try {
+                    role = (await user?.getIdTokenResult())?.claims?.role || '';
+                } catch (e) {}
+
+                runInAction(() => {
+                    authStore.user = user;
+                    authStore.role = role;
+                });
+
+                if ((Object.values(ROLES) as string[]).includes(authStore.role)) {
+                    clearIntervalAsync(refreshClaimsIntervalHolder).catch(() => {});
+                } else {
+                    // no need do handle that error, its mostly some complaim about clearing interval on undefined
+                    refreshClaimsUntilUserIsRecognized(user);
+                }
             }
+        },
+        error => {
+            console.log(error);
         }
-    },
-    error => {
-        console.log(error);
-    }
-);
+    );
+}
 
 export default Login;

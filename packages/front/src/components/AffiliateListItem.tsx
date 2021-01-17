@@ -10,7 +10,6 @@ import Link from 'next/link';
 import { FirebaseImage } from '../firebase/FirebaseImage';
 import { Skeleton } from '@material-ui/lab';
 import { useQuery } from 'react-query';
-import { fireDB } from '../firebase/fireApp';
 import { OccupationRepository } from '../repository/OccupationRepository';
 import { IOccupation } from '../../../../types/__project_defs/IOccupation';
 import { IAddress } from '../../../../types/__project_defs/IAddress';
@@ -35,7 +34,7 @@ export const AffiliateListItem = ({
     showCpf?: boolean;
     showCity?: boolean;
 }) => {
-    const occupationRepository = useMemo(() => new OccupationRepository(fireDB), []);
+    const occupationRepository = useMemo(() => new OccupationRepository(window.fireDB), []);
     // don't worry about firebase quota, that query have cache and invalidation when an occupation update
     // react-query automatically dedup multiple requests for the same data
     const { data } = useQuery<IOccupation>(`occupation_${occupationId}`, () => occupationRepository.findById(occupationId), {

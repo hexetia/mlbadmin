@@ -1,8 +1,7 @@
-import { fireDB } from './fireApp';
 import { attachFireFilters } from './attachFireFilters';
-import firebase from 'firebase/app';
 import { firestoreHasMore } from './firestoreHasMore';
 import { QueryFunctionContext } from 'react-query/types/core/types';
+import type firebase from 'firebase/app';
 
 type QuerySnapshot = firebase.firestore.QuerySnapshot;
 type Query = firebase.firestore.Query;
@@ -18,7 +17,7 @@ export async function getOccupationsOrAffiliates<T>(context: QueryFunctionContex
     const [_, filters, itemsPerPage] = context.queryKey;
     const querySnapshot: undefined | QuerySnapshot | boolean = context.pageParam;
 
-    let query: Query = fireDB.collection(context.queryKey[0] as string);
+    let query: Query = window.fireDB.collection(context.queryKey[0] as string);
     query = attachFireFilters(query, filters);
     query = query.orderBy('name', 'asc');
 

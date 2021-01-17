@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+import type firebase from 'firebase/app';
 
 export const firebaseStorageMock = {
     ref: (ref: string = '') => {

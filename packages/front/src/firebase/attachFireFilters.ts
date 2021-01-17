@@ -1,7 +1,7 @@
 import type { FireFilter } from '../components/filters/FireFilter';
 import { notEmptyStr } from '../utils/StringUtils';
 import { normalizeText } from 'normalize-text';
-import firebase from 'firebase/app';
+import type firebase from 'firebase/app';
 import { lastDayOfMonth } from '../utils/dateUtils';
 
 type Query = firebase.firestore.Query;
@@ -51,12 +51,12 @@ export function attachFireFilters(query: Query, filters: string): Query {
             // because filters was previous serialized in json
             const filterValue = new Date(filter.value);
             query = query
-                .where(key, '>=', firebase.firestore.Timestamp.fromDate(new Date(filterValue.getFullYear(), filterValue.getMonth())))
+                .where(key, '>=', window.firebase.firestore.Timestamp.fromDate(new Date(filterValue.getFullYear(), filterValue.getMonth())))
                 .orderBy(key)
                 .where(
                     key,
                     '<',
-                    firebase.firestore.Timestamp.fromDate(
+                    window.firebase.firestore.Timestamp.fromDate(
                         new Date(filterValue.getFullYear(), filterValue.getMonth(), lastDayOfMonth(filterValue), 23, 59, 59, 99)
                     )
                 );
@@ -69,7 +69,7 @@ export function attachFireFilters(query: Query, filters: string): Query {
                 .where(
                     key,
                     '>=',
-                    firebase.firestore.Timestamp.fromDate(
+                    window.firebase.firestore.Timestamp.fromDate(
                         new Date(filterValue.getFullYear(), filterValue.getMonth(), filterValue.getDate())
                     )
                 )
@@ -77,7 +77,7 @@ export function attachFireFilters(query: Query, filters: string): Query {
                 .where(
                     key,
                     '<',
-                    firebase.firestore.Timestamp.fromDate(
+                    window.firebase.firestore.Timestamp.fromDate(
                         new Date(filterValue.getFullYear(), filterValue.getMonth(), filterValue.getDate(), 23, 59, 59, 99)
                     )
                 );
