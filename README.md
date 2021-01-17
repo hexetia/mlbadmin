@@ -10,7 +10,7 @@ contact by phone and searching for this data on paper cards was time consuming.
 #### Continuous Delivery :heavy_check_mark:
 On every commit on *main* a new app version is published on Firebase automatically*
 #### Continuous Integration :heavy_check_mark:
-On every pull request that target *main* all unit and integration tests will run and you can see you is safe to merge that PR
+On every pull request that target *main* all unit and integration tests will run, and you can see if is safe to merge that PR
 
 *add FIREBASE_TOKEN secret in your github repository, get token using `firebase login:ci`
 
