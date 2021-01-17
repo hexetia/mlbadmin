@@ -1,6 +1,12 @@
-import { attachFireFilters } from './attachFireFilters';
+/**
+ * @jest-environment jsdom
+ */
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+const windowSpy = jest.spyOn(window as any, 'window', 'get');
+windowSpy.mockImplementation(() => ({ firebase }));
+
+import { attachFireFilters } from './attachFireFilters';
 import { lastDayOfMonth } from '../utils/dateUtils';
 
 type WhereFilterOp = '<' | '<=' | '==' | '!=' | '>=' | '>' | 'array-contains' | 'in' | 'array-contains-any' | 'not-in';
