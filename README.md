@@ -58,7 +58,7 @@ and add the following variables:
   Aws credentials to send the system emails.
 
 ### /.firebaserc
-Use the [Firebase cli "use" command](https://firebase.google.com/docs/cli#add_alias) `firebase use` to update the project name before building and deploying the project production
+Use the [Firebase cli "use" command](https://firebase.google.com/docs/cli#add_alias) `firebase use` to update the project name before building and deploying
 
 ### Firebase hosting redirects
 We made a custom script to map next.js routes in firebase.json, so you need to write custom redirects in firebase hosting you need to write that redirects in firebaseHostingRewrites.js
